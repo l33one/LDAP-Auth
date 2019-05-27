@@ -55,15 +55,18 @@ class LDAP_auth{
                 $user_prefix = $CI->config->item('user_prefix'); //checking for domain. e.g. YOUDOMAIN\YOUNAME
                 $user_suffix = $CI->config->item('user_suffix');
                 $dc = $CI->config->item('dc');
+                $ldapconn = ldap_connect($dc) or die("Could not connect to LDAP server.");
+                if ($ldapconn) {
                         // Have to turn off errors or ldap_bind issues stack trace
-                $bind = @ldap_bind($ds,$user_prefix.$username.$user_suffix, $password);
-                //if we can bind we can grind.
-                if ($bind){
-                    return TRUE;
-                    }
-                else{
-                    return FALSE;
-                    }
+                    $bind = @ldap_bind($ldapconn,$user_prefix.$username.$user_suffix, $password);
+                    //if we can bind we can grind.
+                    if ($bind){
+                        return TRUE;
+                        }
+                    else{
+                        return FALSE;
+                        }
+                  }
 
 	    }//END authenticate
 

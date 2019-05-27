@@ -33,4 +33,4 @@
 $config['ldap_server']=""; //set this to your LDAP server name.
 $config['user_prefix']=""; //if you specify your domain you must escape the backslash '\' with a backslash '\\'
 $config['user_suffix'] = NULL;
-$config['dc'] = "";
+$config['dc'] = ""; //Format domain.dom.d
